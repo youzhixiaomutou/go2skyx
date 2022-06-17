@@ -32,8 +32,7 @@ func TestGo2skyx(t *testing.T) {
 		cleanup()
 	}()
 
-	ctx := context.Background()
-	_, span, errCreateSpan := tracer.CreateSpan(ctx,
+	_, span, errCreateSpan := tracer.CreateSpan(context.Background(),
 		WithInjector(func(headerKey, headerValue string) error {
 			propagationMap[headerKey] = headerValue
 			return nil
