@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	addr         = "172.24.140.156:11800"
+	addr         = "127.0.0.1:11800"
 	samplingRate = 1.0
 
 	// mock cross_processing to pass propagation context
