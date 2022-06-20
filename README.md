@@ -58,6 +58,7 @@ xCtx, spanLocal, errLocal := tracer.CreateSpan(context.Background(),
 For `client span`:
 
 ```go
+tagMap := map[string]string{}
 xCtx, span, errCreateSpan := tracer.CreateSpan(context.Background(),
     WithInjector(func(headerKey, headerValue string) error {
         // inject function for propagation with cross_processing
@@ -67,7 +68,7 @@ xCtx, span, errCreateSpan := tracer.CreateSpan(context.Background(),
     WithEndpoint("test go2skyx"),
     WithTraceID("TraceID_"+time.Now().Format(time.RFC3339)),
     // you can add any tag
-    WithTag(TagURL, "..."),
+    WithTagMap(tagMap),
 }
 ```
 
@@ -84,7 +85,7 @@ xCtx, spanServer, errServer := tracer.CreateSpan(context.Background(),
 ```
 
 We provide a full trace usage by mocking invocation with [go2skyx_test.go](#). Run it and you can see tracing info by `SkyWalking Web UI` like:
-![SkyWalkingUI.png](SkyWalkingUI.png)
+![SkyWalkingUI.png](./SkyWalkingUI.png)
 
 ## TODO
 

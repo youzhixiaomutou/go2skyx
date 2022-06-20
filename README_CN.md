@@ -55,6 +55,7 @@ xCtx, spanLocal, errLocal := tracer.CreateSpan(context.Background(),
 客户端 `span`:
 
 ```go
+tagMap := map[string]string{}
 xCtx, span, errCreateSpan := tracer.CreateSpan(context.Background(),
     WithInjector(func(headerKey, headerValue string) error {
         // inject function for propagation with cross_processing
@@ -64,7 +65,7 @@ xCtx, span, errCreateSpan := tracer.CreateSpan(context.Background(),
     WithEndpoint("test go2skyx"),
     WithTraceID("TraceID_"+time.Now().Format(time.RFC3339)),
     // you can add any tag
-    WithTag(TagURL, "..."),
+    WithTagMap(tagMap),
 }
 ```
 
@@ -82,7 +83,7 @@ xCtx, spanServer, errServer := tracer.CreateSpan(context.Background(),
 
 我们在 [go2skyx_test.go](#) 提供了一个模拟完整链路调用过程的使用示例。运行它之后，你就可以 `SkyWalking Web UI` 界面中看到类似下面的输出：
 
-![SkyWalkingUI.png](SkyWalkingUI.png)
+![SkyWalkingUI.png](./SkyWalkingUI.png)
 
 ## 待办
 

@@ -19,7 +19,7 @@ type Span struct {
 	component int32
 	endpoint  string
 	peer      string
-	tagMap    map[Tag]string
+	tagMap    map[string]string
 }
 
 type spanOption func(s *Span)
@@ -84,10 +84,10 @@ func WithPeer(peer string) spanOption {
 	}
 }
 
-// WithTag set tag
-func WithTag(tag Tag, value string) spanOption {
+// WithTagMap set tagMap
+func WithTagMap(tagMap map[string]string) spanOption {
 	return func(s *Span) {
-		s.tagMap[tag] = value
+		s.tagMap = tagMap
 	}
 }
 
@@ -101,6 +101,10 @@ func (span *Span) Error(s ...string) {
 
 func (span *Span) End() {
 	span.spanInner.End()
+}
+
+func (span *Span) GetOperationName() {
+	span.spanInner.GetOperationName()
 }
 
 // SpanLayer Map to the layer of span

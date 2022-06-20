@@ -80,7 +80,7 @@ func (t *Tracer) CreateSpan(ctx context.Context, options ...spanOption) (xCtx co
 		component: componentUnknown,
 		endpoint:  "no operation name",
 		peer:      "No Peer",
-		tagMap:    map[Tag]string{},
+		tagMap:    map[string]string{},
 	}
 
 	for _, option := range options {

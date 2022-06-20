@@ -32,6 +32,8 @@ func TestGo2skyx(t *testing.T) {
 		cleanup()
 	}()
 
+	tagMap := map[string]string{}
+	tagMap[string(TagURL)] = "..."
 	_, span, errCreateSpan := tracer.CreateSpan(context.Background(),
 		WithInjector(func(headerKey, headerValue string) error {
 			propagationMap[headerKey] = headerValue
@@ -41,7 +43,7 @@ func TestGo2skyx(t *testing.T) {
 		WithEndpoint("test go2skyx"),
 		WithTraceID("TraceID_"+time.Now().Format(time.RFC3339)),
 		// you can add any tag
-		WithTag(TagURL, "..."),
+		WithTagMap(tagMap),
 	)
 	if errCreateSpan != nil {
 		panic(errCreateSpan)
